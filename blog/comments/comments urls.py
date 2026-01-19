@@ -1,5 +1,5 @@
 from django.urls import path
-from blog import views
+from . import views
 
 urlpatterns = [
     path('create/<int:post_id>/', views.comment_create, name='comment_create'),
