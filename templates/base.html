@@ -9,17 +9,20 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'post_list' %}">Winx team Mini-Blog</a>
-            <div class="navbar-nav ms-auto">
-                {% if user.is_authenticated %}
-                    <a class="btn btn-outline-light" href="{% url 'post_create' %}">Новый пост</a>
-                    <span class="navbar-text ms-3 me-2">Привет, {{ user.username }}!</span>
-                    <a class="btn btn-outline-light" href="{% url 'logout' %}">Выйти</a>
-                {% else %}
-                    <a class="btn btn-outline-light" href="{% url 'login' %}">Вход</a>
-                    <a class="btn btn-light" href="{% url 'register' %}">Регистрация</a>
-                {% endif %}
-            </div>
+            <a class="navbar-brand" href="{% url 'posts:post_list' %}">Winx team Mini-Blog</a>
+                <div class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        <a class="btn btn-outline-light" href="{% url 'posts:post_create' %}">Новый пост</a>
+                        <span class="navbar-text ms-3 me-2">Привет, {{ user.username }}!</span>
+                        <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-light">Выйти</button>
+                        </form>
+                    {% else %}
+                        <a class="btn btn-outline-light" href="{% url 'login' %}">Вход</a>
+                        <a class="btn btn-light" href="{% url 'register' %}">Регистрация</a>
+                    {% endif %}
+                </div>
         </div>
     </nav>
 
