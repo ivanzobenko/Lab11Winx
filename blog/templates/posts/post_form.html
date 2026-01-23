@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if post %}Редактировать пост{% else %}Новый пост{% endif %}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h2>{% if post %}Редактировать пост{% else %}Создать новый пост{% endif %}</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="id_title">Заголовок:</label>
+                <input type="text" name="title" id="id_title" class="form-control" value="{{ post.title|default:'' }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="id_content">Содержание:</label>
+                <textarea name="content" id="id_content" class="form-control" rows="6" required>{{ post.content|default:'' }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="id_status">Статус:</label>
+                <select name="status" id="id_status" class="form-control">
+                    <option value="published"{% if post.status == 'published' or not post %} selected{% endif %}>Опубликован</option>
+                    <option value="draft"{% if post.status == 'draft' %} selected{% endif %}>Черновик</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                {% if post %}Сохранить{% else %}Создать{% endif %}
+            </button>
+            <a href="{% url 'posts:post_list' %}" class="btn btn-secondary">Отмена</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
