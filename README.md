@@ -20,7 +20,7 @@ https://disk.yandex.ru/i/ggAkcgBTyJSwsw
 
 # Быстрый запуск
 
-## 1. Клонирование и окружение
+ 1. Клонирование и создание вертуального окружения
 ```bash
 git clone https://github.com/ivanzobenko/Lab11Winx
 cd Lab11Winx
